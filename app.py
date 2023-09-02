@@ -1,7 +1,7 @@
 from flask import Flask, render_template, request, jsonify
-
+import requests
 from flask_cors import CORS
-
+from  gptapi import chatgpt
 import speech_recognition as sr
 import pyttsx3
 
@@ -24,7 +24,7 @@ CORS(app)
 def index():
     return render_template('index.html')
 
-CORS(app)
+# CORS(app)
 @app.route('/translate',methods=['POST'])
 def translate():
     
@@ -45,7 +45,9 @@ def translate():
         # print("Did you say ",MyText)
         SpeakText(MyText)
     print(jsonify({'Text':MyText}))
-    return jsonify({'Text':MyText})
+    c=chatgpt(MyText)
+    print(c['response'])
+    return jsonify({'Text':SpeakText(c['response'])})
         
 
 

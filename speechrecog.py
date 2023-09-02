@@ -5,6 +5,7 @@
 import speech_recognition as sr
 import pyttsx3
 
+
 # Initialize the recognizer
 r = sr.Recognizer()
 
@@ -25,7 +26,7 @@ while(1):
 	
 	# Exception handling to handle
 	# exceptions at the runtime
-	try:
+	try:      
 		
 		# use the microphone as source for input.
 		with sr.Microphone() as source2:
@@ -41,8 +42,8 @@ while(1):
 			# Using google to recognize audio
 			Mytext = r.recognize_google(audio2)
 			MyText = Mytext.lower()
-
-			print("Did you say ",MyText)
+			print("MyText =", MyText) 
+			# print("Did you say ",MyText)
 			SpeakText(MyText)
 			
 			
@@ -51,3 +52,4 @@ while(1):
 		
 	except sr.UnknownValueError:
 		print("unknown error occurred")
+

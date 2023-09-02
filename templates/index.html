@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Speech Recognition</title>
+</head>
+<body>
+    <h1>Speech Recognition</h1>
+    <button id="start">Start Listening</button>
+    <div id="output"></div>
+    <script>
+        const startButton = document.getElementById('start');
+        const outputDiv = document.getElementById('output');
+        const apiUrl = '/translate';
+
+        startButton.addEventListener('click', () => {
+            startButton.disabled = true;
+            outputDiv.textContent = 'Listening...';
+
+            fetch(apiUrl, { method: 'POST' })
+                .then(response => response.json())
+                .then(data => {
+                    outputDiv.textContent = `You said: ${data.Text}`;
+                    startButton.disabled = false;
+                })
+                .catch(error => {
+                    outputDiv.textContent = 'An error occurred. Please try again.';
+                    startButton.disabled = false;
+                });
+        });
+    </script>
+</body>
+</html>
